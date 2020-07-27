@@ -33,9 +33,9 @@ const AddTodo = () => {
 					type="submit"
 					variant="outlined"
 					color="primary"
-					className="flex-grow-0 p-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+					className="flex-grow-0 p-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded font-bold"
 				>
-					ADD
+					+
 				</button>
 			</form>
 		</div>

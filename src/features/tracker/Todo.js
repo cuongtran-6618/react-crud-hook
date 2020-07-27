@@ -88,11 +88,11 @@ const Todo = (todo) => {
 			<button
 				onClick={handleToggleCountTime}
 				disabled={todo.completed}
-				className={`inline-flex items-center flex-1 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow flex-grow-0 ${
+				className={`inline-flex items-center flex-1 bg-white hover:bg-gray-100 text-gray-800 font-bold py-2 px-4 border border-gray-400 rounded shadow flex-grow-0 ${
 					todo.completed ? "opacity-50 cursor-not-allowed" : ""
 				}`}
 			>
-				{!todo.active ? "Start" : "Stop"}
+				{!todo.active ? ">" : "x"}
 			</button>
 		</li>
 	);
