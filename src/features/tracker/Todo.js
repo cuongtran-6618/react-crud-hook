@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { getDuration } from "../../utility/Date";
 import { toggleTodo, runCounter, toggleCountTime } from "./todoSlice";
 
 const Todo = (todo) => {
@@ -32,12 +33,12 @@ const Todo = (todo) => {
 		dispatch(toggleCountTime(id));
 	};
 	return (
-		<li className="flex justify-between p-2 items-center">
+		<li className="border flex justify-between p-2 items-center">
 			<input
 				type="checkbox"
 				id={todo.id}
 				value={todo.completed}
-				className="flex-grow-0 flex-1 m-2"
+				className="flex-grow-0 flex-1 my-2"
 			/>
 			<label
 				htmlFor={todo.id}
@@ -57,7 +58,7 @@ const Todo = (todo) => {
 				}}
 				className="flex-1 p-2 text-center flex-grow-0"
 			>
-				{todo.duration}
+				{getDuration(todo.duration)}
 			</span>
 			<button
 				onClick={handleToggleCountTime}
