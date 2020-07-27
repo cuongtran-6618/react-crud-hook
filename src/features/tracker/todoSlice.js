@@ -26,7 +26,7 @@ export const todoSlide = createSlice({
 			},
 		},
 
-		toggleTodo: {
+		toggleCompleteStateOfTodo: {
 			reducer: (state, action) => {
 				return state.map((todo) => {
 					return todo.id === action.payload
@@ -36,14 +36,22 @@ export const todoSlide = createSlice({
 			},
 		},
 
-		toggleCountTime: {
+		toggleCounterActive: {
 			reducer: (state, action) => {
-				console.log("change active state: ", action);
+				console.log("change active state: ", action, state);
 				return state.map((todo) => {
-					return todo.id === action.payload
-						? { ...todo, active: !todo.active }
+					return todo.id === action.payload.id
+						? { ...todo, active: action.payload.active }
 						: todo;
 				});
+			},
+			prepare: (id, active) => {
+				return {
+					payload: {
+						id,
+						active,
+					},
+				};
 			},
 		},
 
@@ -64,9 +72,9 @@ export const todoSlide = createSlice({
 //defined actions
 export const {
 	addTodo,
-	toggleTodo,
+	toggleCompleteStateOfTodo,
 	runCounter,
-	toggleCountTime,
+	toggleCounterActive,
 } = todoSlide.actions;
 
 export default todoSlide.reducer;
