@@ -9,28 +9,54 @@ const Todo = (todo) => {
 	const [active, setActive] = useState(todo.active);
 	const [sessionInterval, setSessionInterval] = useState(undefined);
 
+	/**
+	 * This function handles start/stop timer
+	 * @param {*} e
+	 */
 	const handleToggleCountTime = (e) => {
 		if (!active) {
-			console.log("todo is not actived -> start tracking ....");
-			const interval = setInterval(() => {
-				dispatch(runCounter(todo.id));
-			}, 1000);
-
-			setSessionInterval(interval);
-			console.log("sessionInterval was set to: " + interval);
+			startCountingTime();
 		} else {
-			console.log("todo actived -> stop tracking ....");
-			if (sessionInterval) {
-				console.log("found interval");
-				clearInterval(sessionInterval);
-			} else {
-				console.log("no interval found.... can not stop tracker");
-			}
+			stopCountingTime();
 		}
 
-		setActive(!active);
+		toggleStatusOfTodo(!active);
+	};
+
+	const startCountingTime = () => {
+		const interval = setInterval(() => {
+			dispatch(runCounter(todo.id));
+		}, 1000);
+
+		setSessionInterval(interval);
+	};
+
+	const stopCountingTime = () => {
+		if (sessionInterval) {
+			clearInterval(sessionInterval);
+		} else {
+			console.log("no interval found.... can not stop tracker");
+		}
+	};
+
+	const toggleStatusOfTodo = (active) => {
+		setActive(active);
 		dispatch(toggleCountTime(todo.id));
 	};
+
+	const toggleTodoComplete = () => {
+		// if the todo is not complete then when set it complete it need to stop timer if that is running too
+		if (!todo.completed && !todo.active) {
+			stopCountingTime();
+
+			// set todo is not active
+			toggleStatusOfTodo(false);
+		}
+
+		//change the complet status
+		dispatch(toggleTodo(todo.id));
+	};
+
 	return (
 		<li className="border flex justify-between p-2 items-center">
 			<input
@@ -41,9 +67,7 @@ const Todo = (todo) => {
 			/>
 			<label
 				htmlFor={todo.id}
-				onClick={() => {
-					dispatch(toggleTodo(todo.id));
-				}}
+				onClick={toggleTodoComplete}
 				style={{
 					textDecoration: todo.completed ? "line-through" : "none",
 				}}
