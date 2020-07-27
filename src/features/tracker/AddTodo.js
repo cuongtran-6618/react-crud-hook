@@ -21,16 +21,25 @@ const AddTodo = () => {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
-				<TextField
+			<form
+				onSubmit={handleSubmit}
+				className="text-center flex justify-between bg-gray-200 p-2"
+			>
+				<input
 					name="description"
 					placeholder="What you do?"
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
+					className="p-2 flex-grow mr-2"
 				/>
-				<Button type="submit" variant="outlined" color="primary">
+				<button
+					type="submit"
+					variant="outlined"
+					color="primary"
+					className="flex-grow-0 p-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+				>
 					ADD
-				</Button>
+				</button>
 			</form>
 		</div>
 	);

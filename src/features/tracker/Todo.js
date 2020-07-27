@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { toggleTodo, runCounter, toggleCountTime } from "./todoSlice";
 
@@ -12,9 +10,6 @@ const Todo = (todo) => {
 	const [sessionInterval, setSessionInterval] = useState(undefined);
 
 	const handleToggleCountTime = (e) => {
-		// check if current todo is Active?
-		// no -> trigger Interval, set interval, set active to true
-
 		if (!active) {
 			console.log("todo is not actived -> start tracking ....");
 			const interval = setInterval(() => {
@@ -37,8 +32,13 @@ const Todo = (todo) => {
 		dispatch(toggleCountTime(id));
 	};
 	return (
-		<li>
-			<Checkbox id={todo.id} value={todo.completed}></Checkbox>
+		<li className="flex justify-between p-2 items-center">
+			<input
+				type="checkbox"
+				id={todo.id}
+				value={todo.completed}
+				className="flex-grow-0 flex-1 m-2"
+			/>
 			<label
 				htmlFor={todo.id}
 				onClick={() => {
@@ -47,6 +47,7 @@ const Todo = (todo) => {
 				style={{
 					textDecoration: todo.completed ? "line-through" : "none",
 				}}
+				className="flex-1 p-2 text-left flex-grow "
 			>
 				{todo.description}
 			</label>
@@ -54,12 +55,16 @@ const Todo = (todo) => {
 				style={{
 					textVisible: todo.duration > 0 ? "line-through" : "none",
 				}}
+				className="flex-1 p-2 text-center flex-grow-0"
 			>
 				{todo.duration}
 			</span>
-			<Button onClick={handleToggleCountTime}>
+			<button
+				onClick={handleToggleCountTime}
+				className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow flex-grow-0"
+			>
 				{!todo.active ? "Start" : "Stop"}
-			</Button>
+			</button>
 		</li>
 	);
 };
