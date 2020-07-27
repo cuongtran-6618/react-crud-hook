@@ -26,7 +26,7 @@ export const todoSlide = createSlice({
 			},
 		},
 
-		toggleTodo: {
+		toggleCompleteStateOfTodo: {
 			reducer: (state, action) => {
 				return state.map((todo) => {
 					return todo.id === action.payload
@@ -72,7 +72,7 @@ export const todoSlide = createSlice({
 //defined actions
 export const {
 	addTodo,
-	toggleTodo,
+	toggleCompleteStateOfTodo,
 	runCounter,
 	toggleCounterActive,
 } = todoSlide.actions;

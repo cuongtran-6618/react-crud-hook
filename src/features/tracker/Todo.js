@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { getDuration } from "../../utility/Date";
-import { toggleTodo, runCounter, toggleCounterActive } from "./todoSlice";
+import {
+	toggleCompleteStateOfTodo,
+	runCounter,
+	toggleCounterActive,
+} from "./todoSlice";
 
 const Todo = (todo) => {
 	const dispatch = useDispatch();
@@ -46,14 +50,13 @@ const Todo = (todo) => {
 
 	const toggleTodoComplete = () => {
 		// if the todo is not complete then when set it complete it need to stop timer if that is running too
-		if (!todo.completed && !todo.active) {
+		if (!todo.completed) {
 			stopCountingTime();
-
 			toggleStatusOfTodo(false);
 		}
 
 		//change the complete status
-		dispatch(toggleTodo(todo.id));
+		dispatch(toggleCompleteStateOfTodo(todo.id));
 	};
 
 	return (
