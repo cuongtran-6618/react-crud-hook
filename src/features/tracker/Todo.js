@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { getDuration } from "../../utility/Date";
-import { toggleTodo, runCounter, toggleCountTime } from "./todoSlice";
+import { toggleTodo, runCounter, toggleCounterActive } from "./todoSlice";
 
 const Todo = (todo) => {
 	const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const Todo = (todo) => {
 
 	const toggleStatusOfTodo = (active) => {
 		setActive(active);
-		dispatch(toggleCountTime(todo.id));
+		dispatch(toggleCounterActive(todo.id, active));
 	};
 
 	const toggleTodoComplete = () => {
@@ -49,11 +49,10 @@ const Todo = (todo) => {
 		if (!todo.completed && !todo.active) {
 			stopCountingTime();
 
-			// set todo is not active
 			toggleStatusOfTodo(false);
 		}
 
-		//change the complet status
+		//change the complete status
 		dispatch(toggleTodo(todo.id));
 	};
 
@@ -85,7 +84,8 @@ const Todo = (todo) => {
 			</span>
 			<button
 				onClick={handleToggleCountTime}
-				className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow flex-grow-0"
+				disabled={todo.completed}
+				className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow flex-grow-0 "
 			>
 				{!todo.active ? "Start" : "Stop"}
 			</button>
