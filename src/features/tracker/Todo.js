@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import { useDispatch, useEffect, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleTodo, runCounter, toggleCountTime } from "./todoSlice";
 
 const Todo = (todo) => {
