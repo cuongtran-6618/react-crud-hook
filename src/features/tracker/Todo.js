@@ -6,7 +6,6 @@ import { toggleTodo, runCounter, toggleCountTime } from "./todoSlice";
 
 const Todo = (todo) => {
 	const dispatch = useDispatch();
-	const [id, setId] = useState(todo.id);
 	const [active, setActive] = useState(todo.active);
 	const [sessionInterval, setSessionInterval] = useState(undefined);
 
@@ -14,7 +13,7 @@ const Todo = (todo) => {
 		if (!active) {
 			console.log("todo is not actived -> start tracking ....");
 			const interval = setInterval(() => {
-				dispatch(runCounter(id));
+				dispatch(runCounter(todo.id));
 			}, 1000);
 
 			setSessionInterval(interval);
@@ -30,7 +29,7 @@ const Todo = (todo) => {
 		}
 
 		setActive(!active);
-		dispatch(toggleCountTime(id));
+		dispatch(toggleCountTime(todo.id));
 	};
 	return (
 		<li className="border flex justify-between p-2 items-center">
